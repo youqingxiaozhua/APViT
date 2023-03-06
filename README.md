@@ -19,7 +19,7 @@ ViT-Small was downloaded from [pytorch-image-models](https://github.com/rwightma
 
 ### PaddlePaddle Version
 
-The PaddlePaddle version of TransFER is included in the [paddle](paddle) folder.
+The PaddlePaddle version of TransFER is included in the [Paddle](Paddle) folder.
 
 
 ## Training
