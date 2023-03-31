@@ -223,10 +223,10 @@ def trunc_normal_(tensor, mean=0., std=1., a=-2., b=2.):
 ###
 # From PyTorch internals
 from itertools import repeat
-from torch._six import container_abcs
+import collections.abc
 def _ntuple(n) :
     def parse(x) -> Tuple[int]:
-        if isinstance(x, container_abcs.Iterable):
+        if isinstance(x, collections.abc.Iterable):
             return x
         return tuple(repeat(x, n))
     return parse
