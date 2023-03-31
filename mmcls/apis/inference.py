@@ -32,18 +32,20 @@ def init_model(config, checkpoint=None, device='cuda:0', options=None):
     if options is not None:
         config.merge_from_dict(options)
     config.model.pretrained = None
+    config.model.extractor.pretrained = None
+    config.model.vit.pretrained = None
     model = build_classifier(config.model)
     if checkpoint is not None:
         map_loc = 'cpu' if device == 'cpu' else None
         checkpoint = load_checkpoint(model, checkpoint, map_location=map_loc)
-        if 'CLASSES' in checkpoint['meta']:
-            model.CLASSES = checkpoint['meta']['CLASSES']
-        else:
-            from mmcls.datasets import ImageNet
-            warnings.simplefilter('once')
-            warnings.warn('Class names are not saved in the checkpoint\'s '
-                          'meta data, use imagenet by default.')
-            model.CLASSES = ImageNet.CLASSES
+        class_loaded = False
+        if 'meta' in checkpoint:
+            if 'CLASSES' in checkpoint['meta']:
+                model.CLASSES = checkpoint['meta']['CLASSES']
+                class_loaded = True
+        if not class_loaded:
+            from mmcls.datasets.raf import FER_CLASSES
+            model.CLASSES = FER_CLASSES
     model.cfg = config  # save the config in the model for convenience
     model.to(device)
     model.eval()

@@ -415,8 +415,8 @@ class PoolingViT(BaseBackbone):
         if patch_num != pos_embed.shape[1] - 1:
             logger.warning(f'interpolate pos_embed from {patch_pos_embed.shape[1]} to {patch_num}')
             pos_embed_new = resize_pos_embed_v2(patch_pos_embed, patch_num, 0)
-        else:   # 去掉 cls_token
-            print('does not need to resize！')
+        else:   # remove cls_token
+            print('does not need to resize!')
             pos_embed_new = patch_pos_embed
         del state_dict['pos_embed']
         state_dict['patch_pos_embed'] = pos_embed_new

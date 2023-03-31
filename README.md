@@ -7,6 +7,10 @@ APViT: Vision Transformer With Attentive Pooling for Robust Facial Expression Re
 
 APViT is a simple and efficient Transformer-based method for facial expression recognition (FER). It builds on the [TransFER](https://openaccess.thecvf.com/content/ICCV2021/html/Xue_TransFER_Learning_Relation-Aware_Facial_Expression_Representations_With_Transformers_ICCV_2021_paper.html), but introduces two attentive pooling (AP) modules that do not require any learnable parameters. These modules help the model focus on the most expressive features and ignore the less relevant ones. You can read more about our method in our [paper](https://arxiv.org/abs/2212.05463).
 
+## Update
+
+- 2023-03-31: Added an [notebook demo](demo.ipynb) for inference.
+
 
 ## Installation
 
