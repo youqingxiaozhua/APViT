@@ -9,17 +9,41 @@ APViT is a simple and efficient Transformer-based method for facial expression r
 
 ## Update
 
+- **2023-05-16**: We add a Colab demo for inference, test and training on RAF-DB: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1dwR-30Gt6Twbqsj5FXqaVzXlgtp6Z7Ll?usp=sharing)
 - 2023-03-31: Added an [notebook demo](demo.ipynb) for inference.
 
 
 ## Installation
 
-This project is based on [MMClassification](https://github.com/open-mmlab/mmclassification) and [PaddleClas](https://github.com/PaddlePaddle/PaddleClas), please refer to their repos for installation and dataset preparation.
+This project is based on [MMClassification](https://github.com/open-mmlab/mmclassification) and [PaddleClas](https://github.com/PaddlePaddle/PaddleClas), please refer to their repos for installation.
 
 Notable, our method does not rely on custome cuda operations in mmcv-full.
 
 The pre-trained weight of IR-50 weight was downloaded from [face.evoLVe](https://github.com/ZhaoJ9014/face.evoLVe/#model-zoo), and 
 ViT-Small was downloaded from [pytorch-image-models](https://github.com/rwightman/pytorch-image-models/releases/download/v0.1-weights/vit_small_p16_224-15ec54c9.pth). 
+
+### Data preparation
+
+1. We use the face alignement codes in [face.evl](https://github.com/ZhaoJ9014/face.evoLVe/#Face-Alignment) to align face images first.
+2. The downloaded RAF-DB are reorganized as follow:
+
+```
+data/
+├─ RAF-DB/
+│  ├─ basic/
+│  │  ├─ EmoLabel/
+│  │  │  ├─ train.txt
+│  │  │  ├─ test.txt
+│  │  ├─ Image/
+│  │  │  ├─ aligned/
+│  │  │  ├─ aligned_224/  # reagliend by MTCNN
+```
+3. We provide a preprocessed version of the RAF-DB, which can be downloaded from (here)[https://github.com/youqingxiaozhua/APViT/releases/download/V1.0.0/RAF-DB.zip]. The password of the zip file is calculated by adding the pixel values of the `RAF-DB/basic/Image/aligned/test_0001_aligned.jpg` image. To obtain the password, use the following code:
+
+```Python
+import cv2
+print(cv2.imread('data/RAF-DB/basic/Image/aligned/test_0001_aligned.jpg').sum())
+```
 
 ### PaddlePaddle Version
 
